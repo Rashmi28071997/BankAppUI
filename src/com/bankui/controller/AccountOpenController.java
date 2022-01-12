@@ -1,5 +1,7 @@
 package com.bankui.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -44,7 +46,7 @@ public class AccountOpenController
 	}
 	
 	@RequestMapping("/process-login")
-	public String processLogin(@ModelAttribute UserInfo user, Model model)
+	public String processLogin(@ModelAttribute UserInfo user, Model model,HttpSession session)
 	{
 		HttpHeaders headers = new HttpHeaders();
 		headers.setBasicAuth(user.getUsername(), user.getPassword());	
@@ -58,6 +60,7 @@ public class AccountOpenController
 		{
 			ResponseEntity<UserInfo> entity = restTemplate.exchange(url, HttpMethod.GET, request, UserInfo.class);
 			UserInfo u = entity.getBody();
+			session.setAttribute("username", u.getUsername());
 			model.addAttribute("user", u);
 			return "dashboard";
 		}
@@ -75,6 +78,15 @@ public class AccountOpenController
 	{
 		model.addAttribute("user", user);
 		model.addAttribute("msg", ""); 
+		return "login";
+	}
+	
+	@RequestMapping("/logout")
+	public String showLogout(Model model, HttpSession session)
+	{
+		model.addAttribute("user", user);
+		model.addAttribute("msg", "You are logged out");
+		session.invalidate();
 		return "login";
 	}
 }

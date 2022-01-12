@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+ 
 </head>
 <c:import url="header.jsp" />
 <body>
@@ -19,7 +19,7 @@
 			<sf:form method="post" action="${pageContext.request.contextPath }/process-login" modelAttribute="user">
 				<div class="form-group">
 					<label class="form-label mt-4">LOGIN</label>
-					<div style="font-size:large;  color: red" > <%=request.getAttribute("msg") %></div>
+					<div style="font-size:medium;  color: red" > <%=request.getAttribute("msg") %></div>
 					<div class="form-floating mb-3">
 						<sf:input type="text" class="form-control" id="floatingInput"
 							placeholder="name@example.com" path="username" /> <label
