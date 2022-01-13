@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -33,13 +33,16 @@ pageEncoding="ISO-8859-1"%>
 			 
 			 <div class="card border-primary mb-3">
   <div class="card-header">Transfer</div>
+  <div style="font-size:medium;  color: red" > <%=request.getAttribute("msg") %></div>
+  <sf:form method="get" action="${pageContext.request.contextPath }/process-transfer" modelAttribute="transfer"> 
   <div class="card-body">
     <h5 class="card-title">Enter Beneficiary Account Number to transfer Money</h5>
     <p class="card-text">
     You can transfer to the account that belongs only to our bank</p>
     
     <div class="form-group">
-   <input class="form-control form-control-lg" type="text" placeholder="account number" id="inputLarge">
+   <sf:input class="form-control form-control-lg" type="text" placeholder="account number" id="inputLarge" 
+   path="toAccountNumber" />
 </div>
 
 	<hr />
@@ -49,15 +52,16 @@ pageEncoding="ISO-8859-1"%>
     Maximum limit for transfer is 20000</p>
     
     <div class="form-group">
-   <input class="form-control form-control-lg" type="text" placeholder="amount" id="inputLarge">
+   <sf:input class="form-control form-control-lg" type="text" placeholder="amount" id="inputLarge" 
+   path="amount" />
 </div>
 	
 	<br /><br />
-	<button type="button" class="btn btn-primary btn-lg">Initiate Transfer</button>
+	<input type="submit" class="btn btn-primary btn-lg" value="Initiate Transfer" />
 	
   </div>
   
-  
+  </sf:form>
 </div>
 			</div>
 			<div class="col-lg-1"></div>
